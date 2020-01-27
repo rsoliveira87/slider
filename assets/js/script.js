@@ -5,6 +5,14 @@ class Slider {
         this.interval;
         this.sliderItems = document.querySelectorAll('.slider .items .item');
         this.sliderItemsLength = this.sliderItems.length;
+        this.bullets = document.querySelectorAll('.bullets-wrapper .bullet');
+    }
+
+    onInit() {
+        const self = this;
+        self.initSlider();
+        self.arrowsAction();
+        self.bulletsAction();
     }
     
     addFadeIn() {
@@ -17,8 +25,11 @@ class Slider {
         const self = this;
 
         for(const item of self.sliderItems) {
-            item.classList.remove('fade-in');
-            item.classList.add('fade-out');
+            if(item.classList.contains('fade-in')) {
+                item.classList.remove('fade-in');
+                item.classList.add('fade-out');
+                break;
+            }
         }
     }
     
@@ -26,6 +37,7 @@ class Slider {
         const self = this;
 
         self.removeFadeIn();
+        self.removeActiveBullet();
         
         if((self.count + 1) <= (self.sliderItemsLength - 1)) {
             self.count++;
@@ -34,12 +46,14 @@ class Slider {
         }
         
         self.addFadeIn();
+        self.addActiveBullet();
     }
     
     moveLeft() {
         const self = this;
 
         self.removeFadeIn();
+        self.removeActiveBullet();
         
         if(self.count === 0) {
             self.count = self.sliderItemsLength - 1;
@@ -48,6 +62,7 @@ class Slider {
         }
         
         self.addFadeIn();
+        self.addActiveBullet();
     }
     
     initSlider() {
@@ -77,9 +92,44 @@ class Slider {
             };
         }
     }
+
+    bulletsAction() {
+        const self = this;
+
+        self.bullets.forEach((bullet,index) => {
+            bullet.onclick = e => {
+                e.preventDefault();
+
+                clearInterval(self.interval);
+
+                self.removeActiveBullet();
+
+                bullet.classList.add('active');
+
+                self.count = index;
+                self.removeFadeIn();
+                self.addFadeIn();0
+                self.addActiveBullet();
+                self.initSlider();
+            };
+        });
+    }
+
+    removeActiveBullet() {
+        for(const bullet of this.bullets) {
+            if(bullet.classList.contains('active')) {
+                bullet.classList.remove('active');
+                break;
+            }                
+        }
+    }
+
+    addActiveBullet() {
+        const self = this;
+        self.bullets[self.count].classList.add('active');
+    }
 }
 
 const slider = new Slider;
 
-slider.initSlider();
-slider.arrowsAction();
+slider.onInit();

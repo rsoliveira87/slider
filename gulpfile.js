@@ -1,3 +1,5 @@
+'use strict';
+
 const gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	rename = require('gulp-rename'),
@@ -10,7 +12,7 @@ const scssFile = 'assets/sass/**/*.scss';
 const cssDest = 'assets/css/';
 
 const sassDevOptions = {
-	outputStyle: 'expanded'
+	outputPtyle: 'expanded'
 }
 
 const sassProdOptions = {
@@ -21,41 +23,41 @@ const jsFile = 'assets/js/*js';
 
 const jsDest = 'assets/js/dist/';
 
-gulp.task('sassdev', function() {
-
+gulp.task('sassDev', () => {
 	return gulp.src(scssFile)
-		.pipe(sass().on('error', sass.logError))
+		.pipe(sass(sassDevOptions).on('error', sass.logError))
 		.pipe(gulp.dest(cssDest))
 
 });
 
-gulp.task('sassprod', function() {
+gulp.task('sassProd', () => {
 
 	return gulp.src(scssFile)
-		.pipe(sass().on('error', sass.logError))
+		.pipe(sass(sassProdOptions).on('error', sass.logError))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(cssDest))
 
 });
 
-gulp.task('minifyConcatJS', function(cb){
+gulp.task('jsProd', cb => {
 
 	pump([
 		gulp.src(jsFile),
-		gulp.dest(jDdest),
+        babel({
+			presets: ['@babel/env']
+		}),
+		uglify(),
 		rename({suffix: '.min'}),
-        uglify(),
-        babel(),
 		gulp.dest(jsDest)
 	], cb);
 
 });
 
-gulp.task('w', function() {
+gulp.task('watch', () => {
 
-	gulp.watch(scssFile, ['sassdev']);
-	gulp.watch(scssFile, ['sassprod']);
-    gulp.watch(jsFile, ['minifyConcatJS']);
+	gulp.watch(scssFile, gulp.series('sassDev'));
+	gulp.watch(scssFile, gulp.series('sassProd'));
+	gulp.watch(jsFile, gulp.series('jsProd'));
 });
 
-gulp.task('default', ['sassdev', 'sassprod', 'minifyConcatJS', 'w']);
+gulp.task('default', gulp.series('sassDev', 'sassProd', 'jsProd', 'watch'));

@@ -1,7 +1,7 @@
 <html lang="en">
     <head>
         <title>Simple slider with HTML, CSS and Javascript</title>
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
     </head>
     <body>
         <div class="container">
@@ -24,10 +24,17 @@
                         <p class="item-text text-center">Banner 5</p>
                     </li>
                 </ul>
-                <a href="#prev" class="arrow prev"><<</a>
-                <a href="#next" class="arrow next">>></a>
+                <div class="flex wrap bullets-wrapper">
+                    <a href="#" class="bullet active"></a>
+                    <a href="#" class="bullet"></a>
+                    <a href="#" class="bullet"></a>
+                    <a href="#" class="bullet"></a>
+                    <a href="#" class="bullet"></a>
+                </div>
+                <a href="#prev" class="arrow prev text-center"><<</a>
+                <a href="#next" class="arrow next text-center">>></a>
             </div>
         </div>
     </body>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/dist/script.min.js"></script>
 </html>

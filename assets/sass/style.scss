@@ -1,18 +1,16 @@
-* {
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    margin: 0 auto;
-    max-width: 970px;
-}
+@import 'variables';
+@import 'mixins';
+@import 'default';
 
 .slider,
 .items {
     position: relative;
+}
+
+.slider .arrow,
+.items .item,
+.items .item-text {
+    position: absolute;
 }
 
 .slider {
@@ -24,15 +22,12 @@
     .arrow {
         background: lightblue;
         border-radius: 50%;
-        color: #fff;
+        color: $white;
         display: inline-block;
         font-size: 18px;
         height: 48px;
         line-height: 48px;
         outline: none;
-        position: absolute;
-        text-align: center;
-        text-decoration: none;
         width: 48px;
         &.next {
             right: 0;
@@ -40,14 +35,11 @@
     }
 }
 
-.text-center {
-    text-align: center;
-}
-
 .items,
 .item {
     height: 300px;
-    width: 500px;
+    max-width: 500px;
+    width: 100%;
 }
 
 .items {
@@ -55,8 +47,7 @@
     
     .item {
         list-style: none;
-        position: absolute;
-        transition: all .3s ease-in-out;
+        @include my-transition(.3s);
         &.fade-in {
             opacity: 1;
         }
@@ -82,12 +73,30 @@
 
     .item-text {
         bottom: 30px;
-        color: #fff;
+        color: $white;
         font-size: 18px;
-        position: absolute;
         width: 100%;
     }
-} 
+}
+
+.bullets-wrapper {
+    justify-content: center;
+    margin-top: 10px;
+    
+    .bullet {
+        border: 1px solid lightblue;
+        border-radius: 50%;
+        height: 15px;
+        width: 15px;
+    
+        &.active {
+            background: lightblue;
+        }
+        &:not(:last-child) {
+            margin-right: 5px;
+        }    
+    }
+}
 
 @media only screen and (max-width: 767px) {
     .slider {
