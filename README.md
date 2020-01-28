@@ -17,11 +17,9 @@ Simple slide with HTML, CSS and Javascript
 * jsProd - Converte o script para um formato aceito por todos os navegadores utilizando o Babel e gera o arquivo minificado.
 * watch - Monitora alterações nos arquivos e executa as tasks automaticamente.
 
-Para visualizar o slider basta fazer o clone do repositório e abrir o arquivo `index.html` (localizado na raiz do projeto) no browser.
-
 Todos os arquivos de assets (css, js e scss), estão dentro do diretório assets.
 
-Para efetuar alterações no código é necessário ter o NodeJS instalado, caso não tenha, [clique aqui](https://nodejs.org/en/) e faça do download da versão de acordo com o seu sistema operacional.
+Para rodar o projeto é necessário ter o NodeJS instalado, caso não tenha, [clique aqui](https://nodejs.org/en/) e faça do download da versão de acordo com o seu sistema operacional.
 
 Após efetuar o download do NodeJS, faça o clone do repositório, (caso não tenha o GIT instalado, [clique aqui](https://git-scm.com/downloads)) no seu terminal, execute o comando abaixo.
 
@@ -31,9 +29,11 @@ Dentro da pasta slider, execute o comando abaixo para instalar as dependências 
 
 `npm install`
 
-Depois execute a task do Gulp desejada.
+Depois execute a task default do Gulp para gerar os arquivos CSS e JS.
 
-`gulp` Executa a task default
+`gulp`
+
+Para rodar as outras tasks.
 
 ```
 gulp sassProd
@@ -41,3 +41,5 @@ gulp sassProd
 gulp jsProd
 gulp watch
 ```
+
+Para visualizar o slider basta fazer o clone do repositório e abrir o arquivo `index.html` (localizado na raiz do projeto) no browser.
