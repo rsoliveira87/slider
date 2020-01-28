@@ -42,4 +42,4 @@ gulp jsProd
 gulp watch
 ```
 
-Para visualizar o slider basta fazer o clone do repositório e abrir o arquivo `index.html` (localizado na raiz do projeto) no browser.
+Para visualizar o slider basta abrir o arquivo `index.html` (localizado na raiz do projeto) no browser.
