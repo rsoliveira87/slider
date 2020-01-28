@@ -34,7 +34,10 @@ Dentro da pasta slider, execute o comando abaixo para instalar as dependências 
 Depois execute a task do Gulp desejada.
 
 `gulp` Executa a task default
-`gulp sassProd`
-`gulp sassProd`
-`gulp jsProd`
-`gulp watch`
+
+```
+gulp sassProd
+gulp sassProd
+gulp jsProd
+gulp watch
+```
